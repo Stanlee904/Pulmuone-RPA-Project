@@ -1,0 +1,42 @@
+var list = ["0902098438", "0902098439", "0902099814", "0902100095", "0902100096", "0902100092", "0902100095", "0902098438", "0902100143", "0902100079", "0902100095", "0902100096", "0902098439", "0902099918"];
+
+pause;
+Console.writeLine(list.toString());
+
+var deleteFlag = 0;
+var endFlag = 0;
+var dupIndex = 0;
+
+while (true) {
+    deleteFlag = 0; //>< 중복을 제거 했을때 on 
+
+    if (endFlag == 1) { //>< 중복 제거 작업이 끝났을 때 on
+        break;
+    }
+    for (var i: 0..list.size() - 1) {
+        if (deleteFlag == 1) { //>< 중복 제거가 되었을때 for문 나가서 for문의 list size 초기화 
+            break;
+        }
+        for (var j: i + 1..list.size() - 1) { //>< 
+            try {
+                if (list[i] == list[j]) {
+                    dupIndex = dupIndex + 1;
+                    Console.writeLine(list[i] + " : " + list[j]);
+                    Console.writeLine('* [' + list[j] + '] 중복 제거 - 총 ' + dupIndex + '개 중복 제거');
+                    list.remove(j);
+                }
+            } catch (ArgumentOutOfRangeException) {
+                //					Console.writeLine(ArgumentOutOfRangeException["stack"]);
+                deleteFlag = 1;
+                break;
+            }
+        }
+        if (i == list.size() - 1) {
+            endFlag = 1;
+        }
+    }
+}
+pause;
+
+Console.writeLine(list.toString());
+
